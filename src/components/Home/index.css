@@ -1,0 +1,53 @@
+/* Write your CSS code here */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  background-size: cover;
+  min-height: 100vh;
+}
+.link-item {
+  background-color: #ffffff;
+  text-decoration: none;
+}
+.home-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 30px;
+}
+
+.description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+}
+.shopping-logo {
+  width: 43%;
+}
+.heading {
+  font-size: 45px;
+  font-weight: 800;
+  font-family: 'Roboto';
+  color: #1e293b;
+}
+.home-description {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #64748b;
+}
+.shop-btn {
+  height: 45px;
+  width: 130px;
+  background-color: #0967d2;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #ffffff;
+}
