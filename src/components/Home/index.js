@@ -14,7 +14,7 @@ class Home extends Component {
           <Header />
           <div className="home-page">
             <div className="description-container">
-              <h1 className="heading">Cloths That You Get Noticed</h1>
+              <h1 className="heading">Clothes That Get YOU Noticed</h1>
               <p className="home-description">
                 Fashion is part of the daily air and it does not quite help that
                 it changes all the time. Clothes have always been a marker of
@@ -23,7 +23,7 @@ class Home extends Component {
                 and exciting fashion in your own way.
               </p>
               <button className="shop-btn" type="button">
-                Shope Now{' '}
+                Shop Now
               </button>
             </div>
             <img

@@ -4,16 +4,33 @@ import './index.css'
 
 class LoginForm extends Component {
   state = {
-    userName: '',
-    password: '',
+    InputUserName: '',
+    InputPassword: '',
+    errorMsg: false,
+  }
+
+  onSuccessLogin = () => {
+    const {history} = this.props
+    history.replace('/')
   }
 
   onSubmitForm = async event => {
     event.preventDefault()
 
-    const {userName, password} = this.state
+    const {InputUserName, InputPassword} = this.state
 
-    const userDetails = {userName, password}
+    if (InputUserName === '') {
+      this.setState({errorMsg: true})
+    }
+
+    if (InputPassword === '') {
+      this.setState({errorMsg: true})
+    }
+
+    const userDetails = {
+      username: InputUserName,
+      password: InputPassword,
+    }
 
     const url = 'https://apis.ccbp.in/login'
 
@@ -24,19 +41,23 @@ class LoginForm extends Component {
     const response = await fetch(url, options)
     const data = await response.json()
 
-    console.log(data)
+    if (response.ok === true) {
+      this.onSuccessLogin()
+    } else {
+      this.setState({errorMsg: true})
+    }
   }
 
   changeUserName = event => {
-    this.setState({userName: event.target.value})
+    this.setState({InputUserName: event.target.value})
   }
 
   changePassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({InputPassword: event.target.value})
   }
 
   render() {
-    const {userName, password} = this.state
+    const {InputUserName, InputPassword, errorMsg} = this.state
 
     return (
       <div className="login-container">
@@ -53,7 +74,7 @@ class LoginForm extends Component {
           />
           <form className="form-container" onSubmit={this.onSubmitForm}>
             <label className="label-element" htmlFor="userName">
-              USER NAME
+              USERNAME
             </label>
             <input
               placeholder="Username"
@@ -61,7 +82,7 @@ class LoginForm extends Component {
               type="text"
               id="userName"
               onChange={this.changeUserName}
-              value={userName}
+              value={InputUserName}
             />
 
             <label className="label-element" htmlFor="password">
@@ -69,12 +90,15 @@ class LoginForm extends Component {
             </label>
             <input
               placeholder="Password"
-              className="name-input"
+              className="name-input pswrd"
               type="password"
               id="password"
               onChange={this.changePassword}
-              value={password}
+              value={InputPassword}
             />
+            {errorMsg && (
+              <p className="error-msg">*Username and Password didn't match</p>
+            )}
 
             <button type="submit" className="login-btn">
               Login

@@ -59,4 +59,14 @@
   border: none;
   background-color: #0b69ff;
   border-radius: 5px;
+  margin-top: 20px;
+}
+.error-msg {
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #ff0b37;
+}
+.pswrd {
+  margin-bottom: 0px;
 }
