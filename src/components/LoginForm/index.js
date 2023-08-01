@@ -6,7 +6,8 @@ class LoginForm extends Component {
   state = {
     InputUserName: '',
     InputPassword: '',
-    errorMsg: false,
+    intialErrorMsg: '',
+    errorMsgStatuse: false,
   }
 
   onSuccessLogin = () => {
@@ -14,18 +15,17 @@ class LoginForm extends Component {
     history.replace('/')
   }
 
+  onSubmitFailure = errorMsg => {
+    this.setState({
+      initialErrorMsg: errorMsg,
+      errorMsgStatuse: true,
+    })
+  }
+
   onSubmitForm = async event => {
     event.preventDefault()
 
     const {InputUserName, InputPassword} = this.state
-
-    if (InputUserName === '') {
-      this.setState({errorMsg: true})
-    }
-
-    if (InputPassword === '') {
-      this.setState({errorMsg: true})
-    }
 
     const userDetails = {
       username: InputUserName,
@@ -44,7 +44,7 @@ class LoginForm extends Component {
     if (response.ok === true) {
       this.onSuccessLogin()
     } else {
-      this.setState({errorMsg: true})
+      this.onSubmitFailure(data.error_msg)
     }
   }
 
@@ -57,7 +57,12 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {InputUserName, InputPassword, errorMsg} = this.state
+    const {
+      InputUserName,
+      InputPassword,
+      initialErrorMsg,
+      errorMsgStatuse,
+    } = this.state
 
     return (
       <div className="login-container">
@@ -96,9 +101,7 @@ class LoginForm extends Component {
               onChange={this.changePassword}
               value={InputPassword}
             />
-            {errorMsg && (
-              <p className="error-msg">*Username and Password didn't match</p>
-            )}
+            {errorMsgStatuse && <p className="error-msg">*{initialErrorMsg}</p>}
 
             <button type="submit" className="login-btn">
               Login
